@@ -2,7 +2,14 @@
 
 **Empirically Quantifying Optimism from Spatial Autocorrelation and Proxy-Variable Leakage**  
 _Author:_ **TAKONGMO LIONEL BLERIOT** (<lioneltakoms25@gmail.com>)  
-_An Independent Empirical Machine Learning Research Study_
+_Affiliation:_ Independent Applied Machine Learning Researcher
+
+[![Paper PDF](<https://img.shields.io/badge/Paper-IEEE%20PDF%20(6%20Pages)-blue?style=flat-square&logo=adobeacrobatreader>)](paper/main.pdf)
+[![Executive Summary](https://img.shields.io/badge/Executive%20Summary-2%20Pages%20PDF-orange?style=flat-square&logo=adobeacrobatreader)](paper/executive_summary.pdf)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen?style=flat-square&logo=python)](requirements.txt)
+[![Data: FAO & World Bank](https://img.shields.io/badge/Data-FAO%20%26%20World%20Bank-lightgrey?style=flat-square)](data/)
+
+> 📄 **[Read Full Manuscript (6-Page IEEE Format)](paper/main.pdf)** &nbsp;|&nbsp; 📋 **[Read Executive Summary (2-Page Abstract)](paper/executive_summary.pdf)**
 
 ---
 
