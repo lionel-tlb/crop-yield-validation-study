@@ -1,0 +1,102 @@
+country,average_rain_fall_mm_per_year,avg_temp,pesticides_tonnes
+Albania,1,21,20
+Algeria,1,22,23
+Angola,1,20,7
+Argentina,1,40,20
+Armenia,1,20,17
+Australia,1,130,22
+Austria,1,21,23
+Azerbaijan,1,21,7
+Bahamas,1,19,6
+Bahrain,1,23,18
+Bangladesh,1,22,23
+Belarus,1,20,3
+Belgium,1,12,13
+Botswana,1,21,2
+Brazil,1,179,23
+Bulgaria,1,21,21
+Burkina Faso,1,21,19
+Burundi,1,23,21
+Cameroon,1,22,21
+Canada,1,123,23
+Central African Republic,1,21,4
+Chile,1,43,5
+Colombia,1,40,23
+Croatia,1,21,21
+Denmark,1,23,23
+Dominican Republic,1,38,16
+Ecuador,1,59,23
+Egypt,1,42,23
+El Salvador,1,21,23
+Eritrea,1,17,6
+Estonia,1,21,20
+Finland,1,22,23
+France,1,22,23
+Germany,1,64,23
+Ghana,1,23,14
+Greece,1,21,22
+Guatemala,1,18,17
+Guinea,1,21,20
+Guyana,1,20,10
+Haiti,1,20,11
+Honduras,1,20,22
+Hungary,1,22,23
+India,1,239,23
+Indonesia,1,94,4
+Iraq,1,45,19
+Ireland,1,18,19
+Italy,1,44,23
+Jamaica,1,20,4
+Japan,1,95,13
+Kazakhstan,1,42,19
+Kenya,1,22,8
+Latvia,1,19,21
+Lebanon,1,20,2
+Lesotho,1,20,10
+Libya,1,43,14
+Lithuania,1,21,21
+Madagascar,1,21,23
+Malawi,1,19,16
+Malaysia,1,20,8
+Mali,1,20,22
+Mauritania,1,21,11
+Mauritius,1,23,23
+Mexico,1,147,13
+Montenegro,1,7,5
+Morocco,1,40,16
+Mozambique,1,21,17
+Namibia,1,21,4
+Nepal,1,22,18
+Netherlands,1,23,23
+New Zealand,1,22,17
+Nicaragua,1,20,20
+Niger,1,20,16
+Norway,1,23,23
+Pakistan,1,125,23
+Papua New Guinea,1,20,4
+Peru,1,22,18
+Poland,1,21,22
+Portugal,1,19,22
+Qatar,1,22,7
+Romania,1,22,23
+Rwanda,1,20,22
+Saudi Arabia,1,46,17
+Senegal,1,23,21
+Slovenia,1,21,21
+South Africa,1,63,7
+Spain,1,58,23
+Sri Lanka,1,22,23
+Sudan,1,4,1
+Suriname,1,22,23
+Sweden,1,23,23
+Switzerland,1,20,22
+Tajikistan,1,20,18
+Thailand,1,21,20
+Tunisia,1,21,12
+Turkey,1,106,23
+Uganda,1,22,4
+Ukraine,1,19,21
+United Kingdom,1,76,23
+Uruguay,1,21,22
+Zambia,1,21,3
+Zimbabwe,1,21,23

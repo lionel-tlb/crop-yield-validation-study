@@ -1,0 +1,138 @@
+% !TEX root = executive_summary.tex
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Executive Summary: Validation Protocol Bias in Agricultural\\
+Yield Prediction (1--2 Page Abstract)}
+
+\author{
+\IEEEauthorblockN{TAKONGMO LIONEL BLERIOT}
+\IEEEauthorblockA{
+\textit{Independent ML Researcher}\\
+lioneltakoms25@gmail.com}
+}
+
+\maketitle
+
+\begin{abstract}
+We empirically quantify \emph{optimism bias}---performance inflation from 
+spatial autocorrelation and proxy-variable leakage---when evaluating tabular 
+machine learning models for crop yield prediction. Using the FAO/World Bank 
+Crop Yield dataset (25{,}932 observations; 101 countries; 10 crops; 1990--2013), 
+we compare five models (Global Mean, Per-Crop Mean, Ridge, Random Forest, XGBoost) 
+across three validation protocols: standard Random CV, 
+Leave-Country-Out (Group) CV (LCO-CV), and Expanding-Window Forward Temporal CV. 
+A known data-quality issue motivates the study: the rainfall feature 
+is time-invariant within every country, acting as an injective country identifier 
+and injecting proxy-variable leakage. Random Forest achieves $R^2 = 0.968$ 
+under Random CV but collapses to $R^2 = 0.528$ under LCO-CV (gap: $\Delta = 0.44$), 
+showing no detectable difference from the naive Per-Crop Mean baseline ($R^2 = 0.531$; 
+paired difference $\Delta = -0.004 \pm 0.099$, approximate 95\% CI: $[-0.050, 0.042]$). 
+Permutation tests show that held-out predictions rely on rainfall 
+($\Delta R^2 = 0.370 \pm 0.011$ in RF) alongside dynamic pesticides and temperature. 
+Rainfall ablation indicates that proxy leakage accounts for roughly 13\% of the optimism 
+gap in Random Forest (paired per-split range: $-48\%$ to $+35\%$) and 19\% in XGBoost 
+($-10\%$ to $+45\%$), with the remaining gap consistent with spatial autocorrelation 
+and other country feature fingerprints. Temporal CV yields intermediate nominal scores 
+($R^2 \approx 0.876$), though country-identity leakage remains active across temporal 
+boundaries. Structure-aware validation and simple domain baselines are essential in 
+agricultural ML.
+\end{abstract}
+
+\begin{IEEEkeywords}
+crop yield prediction, cross-validation bias, spatial autocorrelation, 
+data leakage, random forest, XGBoost, food security
+\end{IEEEkeywords}
+
+\section{Motivation and Research Question}
+
+Machine learning models for crop yield prediction routinely report $R^2 > 0.85\text{--}0.90$ 
+under standard random splits in the literature~\cite{vanklompenburg2020}, yet policy and food 
+security deployment demands generalisation to unseen geographies or future years. We ask: 
+\emph{How much does random CV overestimate performance relative to structure-aware alternatives, 
+and what fraction of the gap is attributable to a specific proxy leakage mechanism?}
+
+\section{Data Audit: The Rainfall Proxy Leakage}
+
+The \texttt{average\_rain\_fall\_mm\_per\_year} feature takes exactly one unique 
+value per country across all 101 countries in the dataset~\cite{kaggle_cropyield}. 
+This occurred because the raw table joined a World Bank country mean 
+(\texttt{AG.LND.PRCP.MM}) without year-matching, collapsing temporal variation. 
+The result is an injective 1-to-1 country identifier. Permutation importance 
+tests on held-out test splits under Random CV reveal that permuting rainfall 
+degrades test $R^2$ by $0.370 \pm 0.011$ in Random Forest and $0.279 \pm 0.011$ in XGBoost, 
+placing it among the most influential continuous features alongside dynamic temperature 
+($0.293 / 0.225$) and pesticide tonnage ($0.329 / 0.229$). Flexible tree models 
+likely exploit this barcode to partition data by country.
+
+\section{Key Results}
+
+\begin{table}[h]
+\centering
+\caption{$R^2$ Summary (Full Features, mean $\pm$ SD / 20 repeated splits)}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Random CV} & \textbf{LCO-CV} & \textbf{$\Delta$ (Gap)} \\
+\midrule
+Global Mean   & $-0.000\pm0.000$ & $-0.012\pm0.013$ & $-0.012$ \\
+Per-Crop Mean & $0.599\pm0.006$  & $0.531\pm0.065$  & $-0.068$ \\
+Ridge         & $0.631\pm0.005$  & $0.463\pm0.172$  & $-0.168$ \\
+Random Forest & $0.968\pm0.003$  & $0.528\pm0.103$  & $\mathbf{-0.440}$ \\
+XGBoost       & $0.945\pm0.003$  & $0.564\pm0.083$  & $\mathbf{-0.381}$ \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Effect of Removing Rainfall (Paired gap change after ablation)}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model} & \textbf{Full gap} & \textbf{Ablation gap} & \textbf{Paired $\Delta$ gap} \\
+\midrule
+Random Forest & $0.441\pm0.104$ & $0.381\pm0.098$ & $-0.059\pm0.089$ (${\approx}13\%$) \\
+XGBoost       & $0.381\pm0.084$ & $0.309\pm0.087$ & $-0.072\pm0.075$ (${\approx}19\%$) \\
+\midrule
+\multicolumn{4}{l}{\textit{Random CV drop: RF $-0.091\pm0.009$; XGB $-0.087\pm0.005$}} \\
+\multicolumn{4}{l}{\textit{LCO-CV change: RF $-0.032\pm0.091$; XGB $-0.014\pm0.075$}} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\section{Conclusions}
+
+Random CV inflates reported $R^2$ by 0.38--0.44 points for tree ensembles. 
+Crucially, under LCO-CV, Random Forest ($R^2 = 0.528$) shows no detectable difference 
+from predicting each crop's historical average ($R^2 = 0.531$; $p = 0.87$). 
+Removing the rainfall proxy narrows the paired gap by 13--19\% on average, with the 
+remaining gap reflecting spatial autocorrelation and other country feature fingerprints. 
+Temporal forward evaluation yields intermediate scores ($R^2 \approx 0.876$), but 
+is confounded by country identity persistence. Structure-aware validation should 
+become standard in agricultural ML.
+
+\section*{Reproducibility}
+All code, models, and data pipelines are available at:\\
+\url{https://github.com/lionel-tlb/crop-yield-validation-study}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

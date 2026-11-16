@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Full Paper (main.tex)",
+      "type": "shell",
+      "command": "& 'C:\\Users\\TLB\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.exe' -interaction=nonstopmode -synctex=1 main.tex; & 'C:\\Users\\TLB\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\bibtex.exe' main; & 'C:\\Users\\TLB\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.exe' -interaction=nonstopmode -synctex=1 main.tex; & 'C:\\Users\\TLB\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.exe' -interaction=nonstopmode -synctex=1 main.tex",
+      "options": {
+        "cwd": "${workspaceFolder}/paper"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$latex"]
+    },
+    {
+      "label": "Build Executive Summary (executive_summary.tex)",
+      "type": "shell",
+      "command": "& 'C:\\Users\\TLB\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.exe' -interaction=nonstopmode -synctex=1 executive_summary.tex; & 'C:\\Users\\TLB\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\bibtex.exe' executive_summary; & 'C:\\Users\\TLB\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.exe' -interaction=nonstopmode -synctex=1 executive_summary.tex; & 'C:\\Users\\TLB\\AppData\\Local\\Programs\\MiKTeX\\miktex\\bin\\x64\\pdflatex.exe' -interaction=nonstopmode -synctex=1 executive_summary.tex",
+      "options": {
+        "cwd": "${workspaceFolder}/paper"
+      },
+      "group": "build",
+      "problemMatcher": ["$latex"]
+    }
+  ]
+}
+
